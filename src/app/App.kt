@@ -1,28 +1,44 @@
 package app
 
+import common.Calculator
+import common.Operation
 import react.*
 import react.dom.div
 
 interface KalcState : RState {
-    var total: Double
-    var next: Double
+    var total: Double?
+    var next: Double?
+    var operation: Operation?
 }
 
 class App : RComponent<RProps, KalcState>() {
     init {
-        state.total = 0.0
-        state.next = 0.0
+        state.total = null
+        state.next = null
+        state.operation = null
     }
 
-    private fun handleClick(name: String) {
-        println("In APP: $name")
-        setState { total++ }
+    private fun handleClick(op: Operation) {
+        println("In APP: ${op.getDisplay()}")
+
+        val updatedState: KalcState = Calculator.calculate(state, op)
+
+        setState {
+            total = updatedState.total
+            next = updatedState.next
+            operation = updatedState.operation
+        }
     }
 
     override fun RBuilder.render() {
-        println(state.total)
+        println(JSON.stringify(state))
+        val toDisplay: Double = when {
+            state.next != null -> state.next!!
+            state.total != null -> state.total!!
+            else -> 0.0
+        }
         div("component-app") {
-            display(state.total)
+            display(toDisplay)
             buttonPanel(::handleClick)
         }
     }

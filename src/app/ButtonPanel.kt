@@ -1,38 +1,39 @@
 package app
 
+import common.*
 import react.RBuilder
 import react.dom.div
 
-fun RBuilder.buttonPanel(clickHandler: (String) -> Unit) {
+fun RBuilder.buttonPanel(clickHandler: (Operation) -> Unit) {
     div("component-button-panel") {
         div {
-            button("AC", clickHandler = clickHandler)
-            button("+/-", clickHandler = clickHandler)
-            button("%", clickHandler = clickHandler)
-            button("÷", orange = true, clickHandler = clickHandler)
+            button(Clear(), clickHandler = clickHandler)
+            button(Negate(), clickHandler = clickHandler)
+            button(Percent(), clickHandler = clickHandler)
+            button(Divide(), orange = true, clickHandler = clickHandler)
         }
         div {
-            button("7", clickHandler = clickHandler)
-            button("8", clickHandler = clickHandler)
-            button("9", clickHandler = clickHandler)
-            button("x", orange = true, clickHandler = clickHandler)
+            button(Num(7), clickHandler = clickHandler)
+            button(Num(8), clickHandler = clickHandler)
+            button(Num(9), clickHandler = clickHandler)
+            button(Multiply(), orange = true, clickHandler = clickHandler)
         }
         div {
-            button("4", clickHandler = clickHandler)
-            button("5", clickHandler = clickHandler)
-            button("6", clickHandler = clickHandler)
-            button("-", orange = true, clickHandler = clickHandler)
+            button(Num(4), clickHandler = clickHandler)
+            button(Num(5), clickHandler = clickHandler)
+            button(Num(6), clickHandler = clickHandler)
+            button(Subtract(), orange = true, clickHandler = clickHandler)
         }
         div {
-            button("1", clickHandler = clickHandler)
-            button("2", clickHandler = clickHandler)
-            button("3", clickHandler = clickHandler)
-            button("+", orange = true, clickHandler = clickHandler)
+            button(Num(1), clickHandler = clickHandler)
+            button(Num(2), clickHandler = clickHandler)
+            button(Num(3), clickHandler = clickHandler)
+            button(Add(), orange = true, clickHandler = clickHandler)
         }
         div {
-            button("0", wide = true, clickHandler = clickHandler)
-            button(".", clickHandler = clickHandler)
-            button("=", orange = true, clickHandler = clickHandler)
+            button(Num(0), wide = true, clickHandler = clickHandler)
+            button(Decimal(), clickHandler = clickHandler)
+            button(Eq(), orange = true, clickHandler = clickHandler)
         }
     }
 }
